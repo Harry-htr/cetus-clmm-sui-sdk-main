@@ -89,7 +89,7 @@ function buildTestPosition(sdk, posObjectId) {
 exports.buildTestPosition = buildTestPosition;
 // 0xcd0247d0b67e53dde69b285e7a748e3dc390e8a5244eb9dd9c5c53d95e4cf0aa
 function buildTestAccount() {
-    const mnemonics = '';
+    const mnemonics = 'jelly chapter top canoe prize borrow eagle cushion purchase prevent dove sock';
     const testAccountObject = sui_js_1.Ed25519Keypair.deriveKeypair(mnemonics);
     console.log(' Address: ', testAccountObject.getPublicKey().toSuiAddress());
     return testAccountObject;
