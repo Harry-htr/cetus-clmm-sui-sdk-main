@@ -12,6 +12,7 @@ async function test() {
     const sdk = buildSdk()
 
 const sendKeypair = buildTestAccount()
+sdk.senderAddress = sendKeypair.getPublicKey().toSuiAddress()
 const signer = new RawSigner(sendKeypair, sdk.fullClient)
 // Fetch coin assets of sendKeypair
 const allCoinAsset = await sdk.Resources.getOwnerCoinAssets(sendKeypair.getPublicKey().toSuiAddress())
@@ -22,10 +23,10 @@ const pool = await sdk.Resources.getPool(poolAddress)
 //  Fetch ticks data
 const tickdatas = await sdk.Pool.fetchTicksByRpc(pool.ticks_handle)
 // Whether the swap direction is token a to token b
-const a2b = true
+const a2b = false
 
 // fix input token amount
-const coinAmount = new BN(300000000)
+const coinAmount = new BN(700000000)
 
 console.log('coinAmount',JSON.stringify(coinAmount))
 
@@ -43,18 +44,74 @@ const curSqrtPrice = new BN(pool.current_sqrt_price)
 
 const res = await sdk.Swap.calculateRates({
       decimalsA: 9,
-      decimalsB: 9,
+      decimalsB: 6,
       a2b:  a2b,
       byAmountIn: by_amount_in,
       amount: coinAmount,
       swapTicks: tickdatas,
       currentPool: pool,
     })
+
+
+
+const calculateRates = {
+    estimatedAmountIn: res.estimatedAmountIn.toString(),
+    estimatedAmountOut: res.estimatedAmountOut.toString(),
+    estimatedEndSqrtprice: res.estimatedEndSqrtPrice.toString(),
+    estimatedFeeAmount: res.estimatedFeeAmount.toString(),
+    isExceed: res.isExceed,
+    a2b: a2b,
+    byAmountIn : by_amount_in,
+    }
+
+console.log('calculateRates', JSON.stringify(calculateRates))
+
+
 const toAmount = by_amount_in ? res.estimatedAmountOut : res.estimatedAmountIn
 const amountLimit =  adjustForSlippage(toAmount,slippage,!by_amount_in)
 
 console.log('toAmount: ', JSON.stringify(toAmount))
 console.log('amountLimit: ', JSON.stringify(amountLimit))
+
+// console.log('swap###params####', { amount: res.amount.toString(), amount_limit: amountLimit.toString() })
+
+
+// const swapPayload = await sdk.Swap.createSwapTransactionPayload(
+//     {
+//       pool_id: pool.poolAddress,
+//       coinTypeA: pool.coinTypeA,
+//       coinTypeB: pool.coinTypeB,
+//       a2b: a2b,
+//       by_amount_in: by_amount_in,
+//       amount: res.amount.toString(),
+//       amount_limit: amountLimit.toString(),
+//     },
+//   )
+
+const swapPayload = await sdk.Swap.createSwapTransactionPayload({
+pool_id: pool.poolAddress,
+a2b:a2b,
+by_amount_in: by_amount_in,
+amount: res.amount.toString(),
+amount_limit: amountLimit.toString(),
+coinTypeA: pool.coinTypeA,
+coinTypeB: pool.coinTypeB,
+},{
+byAmountIn:by_amount_in,
+slippage: slippage,
+decimalsA:9,
+decimalsB:9,
+swapTicks: tickdatas,
+currentPool:pool
+})
+
+printTransaction(swapPayload)
+const transferTxn = await sendTransaction(signer,swapPayload)
+console.log('swap: ', transferTxn)
+
+
+
+
 
 
 //获取账户余额
@@ -88,19 +145,19 @@ console.log('amountLimit: ', JSON.stringify(amountLimit))
 
 
 // build swap Payload
-const swapPayload = await sdk.Swap.createSwapTransactionPayload(
-      {
-        pool_id: pool.poolAddress,
-        coinTypeA: pool.coinTypeA,
-        coinTypeB: pool.coinTypeB,
-        a2b: a2b,
-        by_amount_in: by_amount_in,
-        amount: res.amount.toString(),
-        amount_limit: amountLimit.toString(),
-      },
-    )
- const transferTxn = await sendTransaction(signer,swapPayload)
- console.log('swap: ', JSON.stringify(transferTxn))
+// const swapPayload = await sdk.Swap.createSwapTransactionPayload(
+//       {
+//         pool_id: pool.poolAddress,
+//         coinTypeA: pool.coinTypeA,
+//         coinTypeB: pool.coinTypeB,
+//         a2b: a2b,
+//         by_amount_in: by_amount_in,
+//         amount: res.amount.toString(),
+//         amount_limit: amountLimit.toString(),
+//       },
+//     )
+//  const transferTxn = await sendTransaction(signer,swapPayload)
+//  console.log('swap: ', transferTxn)
 
 
 
@@ -131,8 +188,6 @@ const tokens: CoinProvider = {
   }
 
 */
-
-
 
 }
 

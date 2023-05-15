@@ -22,6 +22,7 @@ function test() {
     return __awaiter(this, void 0, void 0, function* () {
         const sdk = (0, init_test_data_1.buildSdk)();
         const sendKeypair = (0, init_test_data_1.buildTestAccount)();
+        sdk.senderAddress = sendKeypair.getPublicKey().toSuiAddress();
         const signer = new sui_js_1.RawSigner(sendKeypair, sdk.fullClient);
         // Fetch coin assets of sendKeypair
         const allCoinAsset = yield sdk.Resources.getOwnerCoinAssets(sendKeypair.getPublicKey().toSuiAddress());
@@ -31,9 +32,9 @@ function test() {
         //  Fetch ticks data
         const tickdatas = yield sdk.Pool.fetchTicksByRpc(pool.ticks_handle);
         // Whether the swap direction is token a to token b
-        const a2b = true;
+        const a2b = false;
         // fix input token amount
-        const coinAmount = new bn_js_1.default(300000000);
+        const coinAmount = new bn_js_1.default(700000000);
         console.log('coinAmount', JSON.stringify(coinAmount));
         // input token amount is token a
         const by_amount_in = true;
@@ -44,17 +45,58 @@ function test() {
         // Estimated amountIn amountOut fee
         const res = yield sdk.Swap.calculateRates({
             decimalsA: 9,
-            decimalsB: 9,
+            decimalsB: 6,
             a2b: a2b,
             byAmountIn: by_amount_in,
             amount: coinAmount,
             swapTicks: tickdatas,
             currentPool: pool,
         });
+        const calculateRates = {
+            estimatedAmountIn: res.estimatedAmountIn.toString(),
+            estimatedAmountOut: res.estimatedAmountOut.toString(),
+            estimatedEndSqrtprice: res.estimatedEndSqrtPrice.toString(),
+            estimatedFeeAmount: res.estimatedFeeAmount.toString(),
+            isExceed: res.isExceed,
+            a2b: a2b,
+            byAmountIn: by_amount_in,
+        };
+        console.log('calculateRates', JSON.stringify(calculateRates));
         const toAmount = by_amount_in ? res.estimatedAmountOut : res.estimatedAmountIn;
         const amountLimit = (0, src_1.adjustForSlippage)(toAmount, slippage, !by_amount_in);
         console.log('toAmount: ', JSON.stringify(toAmount));
         console.log('amountLimit: ', JSON.stringify(amountLimit));
+        // console.log('swap###params####', { amount: res.amount.toString(), amount_limit: amountLimit.toString() })
+        // const swapPayload = await sdk.Swap.createSwapTransactionPayload(
+        //     {
+        //       pool_id: pool.poolAddress,
+        //       coinTypeA: pool.coinTypeA,
+        //       coinTypeB: pool.coinTypeB,
+        //       a2b: a2b,
+        //       by_amount_in: by_amount_in,
+        //       amount: res.amount.toString(),
+        //       amount_limit: amountLimit.toString(),
+        //     },
+        //   )
+        const swapPayload = yield sdk.Swap.createSwapTransactionPayload({
+            pool_id: pool.poolAddress,
+            a2b: a2b,
+            by_amount_in: by_amount_in,
+            amount: res.amount.toString(),
+            amount_limit: amountLimit.toString(),
+            coinTypeA: pool.coinTypeA,
+            coinTypeB: pool.coinTypeB,
+        }, {
+            byAmountIn: by_amount_in,
+            slippage: slippage,
+            decimalsA: 9,
+            decimalsB: 9,
+            swapTicks: tickdatas,
+            currentPool: pool
+        });
+        (0, transaction_util_1.printTransaction)(swapPayload);
+        const transferTxn = yield (0, transaction_util_1.sendTransaction)(signer, swapPayload);
+        console.log('swap: ', transferTxn);
         //获取账户余额
         // const allBalance = await sdk.fullClient.getBalance({
         //     owner : sendKeypair.getPublicKey().toSuiAddress(),
@@ -72,17 +114,19 @@ function test() {
         // 查看 hash 结果, 不需要 resultTxn中就已经查询了
         // 不过需要对resultTxn 进行判断，当异常or gas not enough 的时候，会是undefined, 其他情况正常字典
         // build swap Payload
-        const swapPayload = yield sdk.Swap.createSwapTransactionPayload({
-            pool_id: pool.poolAddress,
-            coinTypeA: pool.coinTypeA,
-            coinTypeB: pool.coinTypeB,
-            a2b: a2b,
-            by_amount_in: by_amount_in,
-            amount: res.amount.toString(),
-            amount_limit: amountLimit.toString(),
-        });
-        const transferTxn = yield (0, transaction_util_1.sendTransaction)(signer, swapPayload);
-        console.log('swap: ', JSON.stringify(transferTxn));
+        // const swapPayload = await sdk.Swap.createSwapTransactionPayload(
+        //       {
+        //         pool_id: pool.poolAddress,
+        //         coinTypeA: pool.coinTypeA,
+        //         coinTypeB: pool.coinTypeB,
+        //         a2b: a2b,
+        //         by_amount_in: by_amount_in,
+        //         amount: res.amount.toString(),
+        //         amount_limit: amountLimit.toString(),
+        //       },
+        //     )
+        //  const transferTxn = await sendTransaction(signer,swapPayload)
+        //  console.log('swap: ', transferTxn)
         //暂时用作查询使用
         /*
         const tokens: CoinProvider = {
