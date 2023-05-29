@@ -105,9 +105,9 @@ swapTicks: tickdatas,
 currentPool:pool
 })
 
-printTransaction(swapPayload)
-const transferTxn = await sendTransaction(signer,swapPayload)
-console.log('swap: ', transferTxn)
+// printTransaction(swapPayload)
+// const transferTxn = await sendTransaction(signer,swapPayload)
+// console.log('swap: ', transferTxn)
 
 
 
@@ -116,24 +116,24 @@ console.log('swap: ', transferTxn)
 
 //获取账户余额
 
-// const allBalance = await sdk.fullClient.getBalance({
-//     owner : sendKeypair.getPublicKey().toSuiAddress(),
-//     coinType: '0x2::sui::SUI'
-//     })
-// console.log('allBalance: ', JSON.stringify(allBalance))
+const allBalance = await sdk.fullClient.getBalance({
+    owner : sendKeypair.getPublicKey().toSuiAddress(),
+    coinType: '0x2::sui::SUI'
+    })
+console.log('allBalance: ', JSON.stringify(allBalance))
 
 // 转账sui or other token 
 
-// const tx = new TxBlock()
-// const recipient = "0x5252031ef2397cd9979216d7460219b91937445f51e0a0ac2b1c286b7ee2351a"
+const tx = new TxBlock()
+const recipient = "0x5252031ef2397cd9979216d7460219b91937445f51e0a0ac2b1c286b7ee2351a"
 // tx.transferSui(recipient,1 * 1_000_000_000)
 
 
 //transfer other coin 
-// tx.transferCoin(recipient,3 * 1_000_000_000,["0x6864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b"])
-// const resultTxn = await sendTransaction(signer,tx.txBlock)
+tx.transferCoin(recipient,3 * 1_000_000_000,["0x6864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b"])
+const resultTxn = await sendTransaction(signer,tx.txBlock)
 
-// console.log(JSON.stringify(resultTxn));
+console.log("resultTxn",JSON.stringify(resultTxn));
 
 
 // 查看 hash 结果, 不需要 resultTxn中就已经查询了

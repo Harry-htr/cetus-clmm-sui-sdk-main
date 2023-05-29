@@ -18,6 +18,7 @@ const init_test_data_1 = require("./data/init_test_data");
 require("isomorphic-fetch");
 const transaction_util_1 = require("../src/utils/transaction-util");
 const src_1 = require("../src");
+const tx_block_1 = require("../src/utils/tx-block");
 function test() {
     return __awaiter(this, void 0, void 0, function* () {
         const sdk = (0, init_test_data_1.buildSdk)();
@@ -94,23 +95,23 @@ function test() {
             swapTicks: tickdatas,
             currentPool: pool
         });
-        (0, transaction_util_1.printTransaction)(swapPayload);
-        const transferTxn = yield (0, transaction_util_1.sendTransaction)(signer, swapPayload);
-        console.log('swap: ', transferTxn);
+        // printTransaction(swapPayload)
+        // const transferTxn = await sendTransaction(signer,swapPayload)
+        // console.log('swap: ', transferTxn)
         //获取账户余额
-        // const allBalance = await sdk.fullClient.getBalance({
-        //     owner : sendKeypair.getPublicKey().toSuiAddress(),
-        //     coinType: '0x2::sui::SUI'
-        //     })
-        // console.log('allBalance: ', JSON.stringify(allBalance))
+        const allBalance = yield sdk.fullClient.getBalance({
+            owner: sendKeypair.getPublicKey().toSuiAddress(),
+            coinType: '0x2::sui::SUI'
+        });
+        console.log('allBalance: ', JSON.stringify(allBalance));
         // 转账sui or other token 
-        // const tx = new TxBlock()
-        // const recipient = "0x5252031ef2397cd9979216d7460219b91937445f51e0a0ac2b1c286b7ee2351a"
+        const tx = new tx_block_1.TxBlock();
+        const recipient = "0x5252031ef2397cd9979216d7460219b91937445f51e0a0ac2b1c286b7ee2351a";
         // tx.transferSui(recipient,1 * 1_000_000_000)
         //transfer other coin 
-        // tx.transferCoin(recipient,3 * 1_000_000_000,["0x6864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b"])
-        // const resultTxn = await sendTransaction(signer,tx.txBlock)
-        // console.log(JSON.stringify(resultTxn));
+        tx.transferCoin(recipient, 3 * 1000000000, ["0x6864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b"]);
+        const resultTxn = yield (0, transaction_util_1.sendTransaction)(signer, tx.txBlock);
+        console.log("resultTxn", JSON.stringify(resultTxn));
         // 查看 hash 结果, 不需要 resultTxn中就已经查询了
         // 不过需要对resultTxn 进行判断，当异常or gas not enough 的时候，会是undefined, 其他情况正常字典
         // build swap Payload
