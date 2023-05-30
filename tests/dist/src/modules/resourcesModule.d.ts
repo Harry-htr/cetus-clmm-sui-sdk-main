@@ -10,7 +10,7 @@ export declare enum PositionStatus {
     'Exists' = "Exists",
     'NotExists' = "NotExists"
 }
-export type Position = {
+export declare type Position = {
     pos_object_id: SuiObjectIdType;
     owner: SuiObjectIdType;
     pool: SuiObjectIdType;
@@ -23,7 +23,7 @@ export type Position = {
     tick_upper_index: number;
     position_status: PositionStatus;
 } & NFT & PositionReward;
-export type PositionReward = {
+export declare type PositionReward = {
     pos_object_id: SuiObjectIdType;
     liquidity: string;
     tick_lower_index: number;
@@ -39,15 +39,15 @@ export type PositionReward = {
     reward_growth_inside_1: string;
     reward_growth_inside_2: string;
 };
-export type CoinPairType = {
+export declare type CoinPairType = {
     coinTypeA: SuiAddressType;
     coinTypeB: SuiAddressType;
 };
-export type PoolImmutables = {
+export declare type PoolImmutables = {
     poolAddress: string;
     tickSpacing: string;
 } & CoinPairType;
-export type Pool = {
+export declare type Pool = {
     poolType: string;
     coinAmountA: number;
     coinAmountB: number;
@@ -68,18 +68,18 @@ export type Pool = {
     uri: string;
     name: string;
 } & PoolImmutables;
-export type Rewarder = {
+export declare type Rewarder = {
     coinAddress: string;
     emissions_per_second: number;
     growth_global: number;
     emissionsEveryDay: number;
 };
-export type InitEvent = {
+export declare type InitEvent = {
     pools_id: SuiObjectIdType;
     global_config_id: SuiObjectIdType;
     global_vault_id: SuiObjectIdType;
 };
-export type CreatePartnerEvent = {
+export declare type CreatePartnerEvent = {
     name: string;
     recipient: SuiAddressType;
     partner_id: SuiObjectIdType;
@@ -88,20 +88,20 @@ export type CreatePartnerEvent = {
     start_epoch: string;
     end_epoch: string;
 };
-export type FaucetEvent = {
+export declare type FaucetEvent = {
     id: string;
     time: number;
 };
-export type CoinAsset = {
+export declare type CoinAsset = {
     coinAddress: SuiAddressType;
     coinObjectId: SuiObjectIdType;
     balance: bigint;
 };
-export type WarpSuiObject = {
+export declare type WarpSuiObject = {
     coinAddress: SuiAddressType;
     balance: number;
 } & SuiMoveObject;
-export type FaucetCoin = {
+export declare type FaucetCoin = {
     transactionModule: string;
     suplyID: SuiObjectIdType;
     decimals: number;

@@ -11,7 +11,7 @@ export declare enum SplitUnit {
 }
 export declare function createSplitArray(minSplitUnit: SplitUnit): number[];
 export declare function createSplitAmountArray(amount: BN, minSplitUnit: SplitUnit): BN[];
-export type SplitSwapResult = {
+export declare type SplitSwapResult = {
     amountInArray: BN[];
     amountOutArray: BN[];
     feeAmountArray: BN[];

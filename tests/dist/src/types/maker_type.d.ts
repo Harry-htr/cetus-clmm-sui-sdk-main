@@ -2,22 +2,22 @@ import { CoinPairType, Position } from '../modules/resourcesModule';
 import { SuiAddressType, SuiObjectIdType } from './sui';
 export declare const MakerRouterModule = "router";
 export declare const CONFIG_PERCENT_MULTIPER = 10000;
-export type MakerInitEvent = {
+export declare type MakerInitEvent = {
     maker_config_id: SuiObjectIdType;
     maker_pool_handle: SuiObjectIdType;
 };
-export type MakerPoolPeriod = {
+export declare type MakerPoolPeriod = {
     id: SuiObjectIdType;
     start_time: number;
     end_time: number;
     period: number;
 };
-export type MakerPoolImmutables = {
+export declare type MakerPoolImmutables = {
     bonus_type: SuiAddressType;
     clmm_pool_id: SuiObjectIdType;
     pool_id: SuiObjectIdType;
 } & CoinPairType;
-export type MakerPoolState = {
+export declare type MakerPoolState = {
     start_time: number;
     interval_day: number;
     is_open: boolean;
@@ -38,12 +38,12 @@ export type MakerPoolState = {
     };
     index: number;
 };
-export type MakerPool = MakerPoolImmutables & MakerPoolState;
-export type RewarderMultiplier = {
+export declare type MakerPool = MakerPoolImmutables & MakerPoolState;
+export declare type RewarderMultiplier = {
     rate: number;
     multiplier: number;
 };
-export type MarkerPosition = {
+export declare type MarkerPosition = {
     period_id: SuiObjectIdType;
     id: SuiObjectIdType;
     bonus_num: string;
@@ -55,7 +55,7 @@ export type MarkerPosition = {
     fee_share_rate: number;
     clmm_position?: Position;
 };
-export type PoolBonusInfo = {
+export declare type PoolBonusInfo = {
     type: string;
     time: number;
     settle_time: number;
@@ -66,14 +66,14 @@ export type PoolBonusInfo = {
     is_vacant: boolean;
     redeemed_num: string;
 };
-export type ClaimParams = {
+export declare type ClaimParams = {
     market_pool_id: SuiObjectIdType;
     position_nft_id: SuiObjectIdType;
     ve_nft_id: SuiObjectIdType;
     bonus_type: SuiAddressType;
     phase: number;
 };
-export type ClaimAllParams = {
+export declare type ClaimAllParams = {
     whale_nfts: {
         bonus_type: SuiAddressType;
         pool_id: SuiObjectIdType;

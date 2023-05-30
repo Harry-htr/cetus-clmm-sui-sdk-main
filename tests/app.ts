@@ -180,7 +180,7 @@ app.get('/get_token_balance/:token_id', async (req, res) => {
     try {
         const token_id = req.params.token_id;
         const balance = await get_token_balance(token_id);
-        res.json({ balance });
+        res.send(balance);
     } catch (error: any) {
         res.status(500).send(error.toString());
     }
@@ -190,7 +190,7 @@ app.get('/get_token_balance/:token_id', async (req, res) => {
 app.get('/get_token_balances', async (req, res) => {
     try {
         const balances = await get_token_balances();
-        res.json({ balances });
+        res.send(balances);
     } catch (error: any) {
         res.status(500).send(error.toString());
     }
@@ -200,8 +200,9 @@ app.get('/get_token_balances', async (req, res) => {
 app.post('/transfer', async (req, res) => {
     try {
         const { token_name, objectid, num, to_address } = req.body;
+        console.log("body", req.body)
         const result = await transfer(token_name, objectid, num, to_address);
-        res.json({ result });
+        res.send(result);
     } catch (error: any) {
         res.status(500).send(error.toString());
     }
@@ -212,8 +213,9 @@ app.post('/calculate_pnl_rates', async (req, res) => {
     try {
         // pool_id: string, decimalsA: number, decimalsB: number, numA: number, numB: number
         const { pool_id, decimalsA, decimalsB, numA, numB } = req.body;
+        console.log("body", req.body)
         const result = await calculate_pnl_rates(pool_id, decimalsA, decimalsB, numA, numB);
-        res.json({ result });
+        res.send(result);
     } catch (error: any) {
         res.status(500).send(error.toString());
     }
@@ -223,8 +225,9 @@ app.post('/swap', async (req, res) => {
     try {
         // pool_id: string, a2b: boolean, decimalsA: number, decimalsB: number, num: number, slippage_ratio: number
         const { pool_id, a2b, decimalsA, decimalsB, num, slippage_ratio } = req.body;
+        console.log("body", req.body)
         const result = await swap(pool_id, a2b, decimalsA, decimalsB, num, slippage_ratio);
-        res.json({ result });
+        res.send(result);
     } catch (error: any) {
         res.status(500).send(error.toString());
     }

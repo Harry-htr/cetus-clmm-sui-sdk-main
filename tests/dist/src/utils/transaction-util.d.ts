@@ -10,7 +10,7 @@ export declare function findAdjustCoin(coinPair: CoinPairType): {
     isAdjustCoinA: boolean;
     isAdjustCoinB: boolean;
 };
-export type BuildCoinInputResult = {
+export declare type BuildCoinInputResult = {
     transactionArgument: TransactionArgument[];
     remainCoins: CoinAsset[];
 };

@@ -8,11 +8,11 @@ import { IModule } from '../interfaces/IModule';
 import { CoinPairType, Pool } from './resourcesModule';
 export declare const AMM_SWAP_MODULE = "amm_swap";
 export declare const POOL_STRUCT = "Pool";
-export type createTestTransferTxPayloadParams = {
+export declare type createTestTransferTxPayloadParams = {
     account: string;
     value: number;
 };
-export type CalculateRatesParams = {
+export declare type CalculateRatesParams = {
     decimalsA: number;
     decimalsB: number;
     a2b: boolean;
@@ -21,7 +21,7 @@ export type CalculateRatesParams = {
     swapTicks: Array<TickData>;
     currentPool: Pool;
 };
-export type CalculateRatesResult = {
+export declare type CalculateRatesResult = {
     estimatedAmountIn: BN;
     estimatedAmountOut: BN;
     estimatedEndSqrtPrice: BN;
@@ -33,7 +33,7 @@ export type CalculateRatesResult = {
     amount: BN;
     priceImpactPct: number;
 };
-export type SwapParams = {
+export declare type SwapParams = {
     pool_id: SuiObjectIdType;
     a2b: boolean;
     by_amount_in: boolean;
@@ -41,7 +41,7 @@ export type SwapParams = {
     amount_limit: string;
     swap_partner?: string;
 } & CoinPairType;
-export type PreSwapParams = {
+export declare type PreSwapParams = {
     pool: Pool;
     current_sqrt_price: number;
     decimalsA: number;
@@ -50,7 +50,7 @@ export type PreSwapParams = {
     by_amount_in: boolean;
     amount: string;
 } & CoinPairType;
-export type PreSwapWithMultiPoolParams = {
+export declare type PreSwapWithMultiPoolParams = {
     poolAddresses: string[];
     decimalsA: number;
     decimalsB: number;
@@ -58,7 +58,7 @@ export type PreSwapWithMultiPoolParams = {
     byAmountIn: boolean;
     amount: string;
 } & CoinPairType;
-export type TransPreSwapWithMultiPoolParams = {
+export declare type TransPreSwapWithMultiPoolParams = {
     poolAddress: string;
     decimalsA: number;
     decimalsB: number;

@@ -1,10 +1,10 @@
 import BN from 'bn.js';
-export type DecreaseLiquidityInput = {
+export declare type DecreaseLiquidityInput = {
     tokenMinA: BN;
     tokenMinB: BN;
     liquidityAmount: BN;
 };
-export type IncreaseLiquidityInput = {
+export declare type IncreaseLiquidityInput = {
     tokenMaxA: BN;
     tokenMaxB: BN;
     liquidityAmount: BN;

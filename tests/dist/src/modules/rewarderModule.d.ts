@@ -4,13 +4,13 @@ import { SuiAddressType, SuiObjectIdType } from '../types/sui';
 import { CoinPairType, Pool } from './resourcesModule';
 import { SDK } from '../sdk';
 import { IModule } from '../interfaces/IModule';
-export type CollectRewarderParams = {
+export declare type CollectRewarderParams = {
     pool_id: SuiObjectIdType;
     pos_id: SuiObjectIdType;
     collect_fee: boolean;
     rewarder_coin_types: SuiAddressType[];
 } & CoinPairType;
-export type RewarderAmountOwed = {
+export declare type RewarderAmountOwed = {
     amount_owed: BN;
     coin_address: string;
 };

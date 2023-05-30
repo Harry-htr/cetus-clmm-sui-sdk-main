@@ -1,31 +1,31 @@
 import { SuiObjectIdType, SuiAddressType } from './sui';
 export declare const LaunchpadRouterModule = "router";
 export declare const CONST_DENOMINATOR = 1000000000;
-export type LaunchpadCoinPairType = {
+export declare type LaunchpadCoinPairType = {
     coin_type_sale: SuiAddressType;
     coin_type_raise: SuiAddressType;
 };
-export type LaunchpadInitEvent = {
+export declare type LaunchpadInitEvent = {
     pools_id: SuiObjectIdType;
     admin_cap_id: SuiObjectIdType;
     config_cap_id: SuiObjectIdType;
 };
-export type LaunchpadInitLockEvent = {
+export declare type LaunchpadInitLockEvent = {
     lock_manager_id: SuiObjectIdType;
 };
-export type LockNFTEvent = {
+export declare type LockNFTEvent = {
     locked_time: number;
     end_lock_time: number;
     nft_type: string;
     lock_nft_id: SuiObjectIdType;
     recipient: SuiObjectIdType;
 };
-export type LaunchpadPoolImmutables = {
+export declare type LaunchpadPoolImmutables = {
     coin_type_sale: SuiAddressType;
     coin_type_raise: SuiAddressType;
     pool_address: SuiObjectIdType;
 };
-export type LaunchpadPoolState = {
+export declare type LaunchpadPoolState = {
     pool_type: SuiAddressType;
     is_settle: boolean;
     current_price: string;
@@ -64,7 +64,7 @@ export type LaunchpadPoolState = {
     reality_raise_total: string;
     pool_status: LaunchpadPoolActivityState;
 };
-export type LaunchpadPool = LaunchpadPoolImmutables & LaunchpadPoolState;
+export declare type LaunchpadPool = LaunchpadPoolImmutables & LaunchpadPoolState;
 export declare enum LaunchpadPoolActivityState {
     Upcoming = "Upcoming",
     Live = "Live",
@@ -73,7 +73,7 @@ export declare enum LaunchpadPoolActivityState {
     Failed = "Failed",
     Canceled = "Canceled"
 }
-export type CreateLaunchpadPoolParams = {
+export declare type CreateLaunchpadPoolParams = {
     recipient: SuiObjectIdType;
     initialize_price: string;
     sale_total: string;
@@ -90,14 +90,14 @@ export type CreateLaunchpadPoolParams = {
     raise_decimals: number;
     tick_spacing: number;
 } & LaunchpadCoinPairType;
-export type PurchaseParams = {
+export declare type PurchaseParams = {
     pool_address: SuiObjectIdType;
     purchase_amount: string;
 } & LaunchpadCoinPairType;
-export type ClaimParams = {
+export declare type ClaimParams = {
     pool_address: SuiObjectIdType;
 } & LaunchpadCoinPairType;
-export type SettleParams = {
+export declare type SettleParams = {
     pool_address: SuiObjectIdType;
     clmm_args?: {
         clmm_pool_address: SuiObjectIdType;
@@ -108,58 +108,58 @@ export type SettleParams = {
         opposite: boolean;
     };
 } & LaunchpadCoinPairType;
-export type SettleForCreateClmmPoolParams = {
+export declare type SettleForCreateClmmPoolParams = {
     pool_address: SuiObjectIdType;
     recipient: SuiObjectIdType;
     tick_spacing: string;
     initialize_sqrt_price: string;
     uri: string;
 } & LaunchpadCoinPairType;
-export type WithdrawParams = {
+export declare type WithdrawParams = {
     pool_address: SuiObjectIdType;
     sale_amount: bigint;
     raise_amount: bigint;
 } & LaunchpadCoinPairType;
-export type AddUserToWhitelistParams = {
+export declare type AddUserToWhitelistParams = {
     pool_address: SuiObjectIdType;
     user_addrs: SuiObjectIdType[];
     safe_limit_amount: string;
 } & LaunchpadCoinPairType;
-export type UpdateWhitelistCapParams = {
+export declare type UpdateWhitelistCapParams = {
     pool_address: SuiObjectIdType;
     white_list_member: SuiObjectIdType;
     safe_limit_amount: number;
     hard_cap_total: number;
 } & LaunchpadCoinPairType;
-export type RemoveWhitelistParams = {
+export declare type RemoveWhitelistParams = {
     pool_address: SuiObjectIdType;
     user_addrs: SuiObjectIdType[];
 } & LaunchpadCoinPairType;
-export type UnlockNftParams = {
+export declare type UnlockNftParams = {
     lock_nft: SuiObjectIdType;
     nft_type: SuiAddressType;
 };
-export type CancelParams = {
+export declare type CancelParams = {
     pool_address: SuiObjectIdType;
 } & LaunchpadCoinPairType;
-export type UpdateRecipientParams = {
+export declare type UpdateRecipientParams = {
     pool_address: SuiObjectIdType;
     new_recipient: SuiObjectIdType;
 } & LaunchpadCoinPairType;
-export type UpdatePoolDurationParams = {
+export declare type UpdatePoolDurationParams = {
     pool_address: SuiObjectIdType;
     activity_duration: number;
     settle_duration: number;
     lock_duration: number;
 } & LaunchpadCoinPairType;
-export type PurchaseMark = {
+export declare type PurchaseMark = {
     id: SuiObjectIdType;
     pool_id: SuiObjectIdType;
     purchase_total: string;
     obtain_sale_amount: string;
     used_raise_amount: string;
 };
-export type SettleEvent = {
+export declare type SettleEvent = {
     pool_id: SuiObjectIdType;
     settle_price: string;
     unused_sale: string;

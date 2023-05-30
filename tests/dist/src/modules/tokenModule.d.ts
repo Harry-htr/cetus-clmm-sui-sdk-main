@@ -3,7 +3,7 @@ import { SDK } from '../sdk';
 import { IModule } from '../interfaces/IModule';
 export declare const cacheTime5min: number;
 export declare const cacheTime24h: number;
-export type TokenInfo = {
+export declare type TokenInfo = {
     name: string;
     symbol: string;
     official_symbol: string;
@@ -13,7 +13,7 @@ export type TokenInfo = {
     logo_url: string;
     address: string;
 } & Record<string, any>;
-export type PoolInfo = {
+export declare type PoolInfo = {
     symbol: string;
     name: string;
     decimals: number;
@@ -31,7 +31,7 @@ export type PoolInfo = {
     rewarder_display3: boolean;
     is_stable: boolean;
 } & Record<string, any>;
-export type TokenConfigEvent = {
+export declare type TokenConfigEvent = {
     coin_registry_id: SuiObjectIdType;
     coin_list_owner: SuiObjectIdType;
     pool_registry_id: SuiObjectIdType;

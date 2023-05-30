@@ -1,7 +1,7 @@
 import BN from 'bn.js';
 import Decimal from 'decimal.js';
 export declare function estPoolAPR(preBlockReward: BN, rewardPrice: BN, totalTradingFee: BN, totalLiquidityValue: BN): BN;
-export type estPosAPRResult = {
+export declare type estPosAPRResult = {
     feeAPR: Decimal;
     posRewarder0APR: Decimal;
     posRewarder1APR: Decimal;

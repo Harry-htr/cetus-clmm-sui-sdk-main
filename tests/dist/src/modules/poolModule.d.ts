@@ -4,19 +4,19 @@ import { SuiObjectIdType } from '../types/sui';
 import { SDK } from '../sdk';
 import { IModule } from '../interfaces/IModule';
 import { CoinPairType, PositionReward } from './resourcesModule';
-export type CreatePoolParams = {
+export declare type CreatePoolParams = {
     tick_spacing: number;
     initialize_sqrt_price: string;
     uri: string;
 } & CoinPairType;
-export type CreatePoolAddLiquidityParams = {
+export declare type CreatePoolAddLiquidityParams = {
     amount_a: number | string;
     amount_b: number | string;
     fix_amount_a: boolean;
     tick_lower: number;
     tick_upper: number;
 } & CreatePoolParams;
-export type FetchParams = {
+export declare type FetchParams = {
     pool_id: SuiObjectIdType;
 } & CoinPairType;
 export declare class PoolModule implements IModule {

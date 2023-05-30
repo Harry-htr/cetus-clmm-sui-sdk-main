@@ -4,26 +4,26 @@ export declare const DividendsRouterModule = "router";
 export declare const ONE_DAY_SECONDS: number;
 export declare const EXCHANGE_RATE_MULTIPER = 1000;
 export declare const REDEEM_NUM_MULTIPER = 100000000000;
-export type XwhaleInitEvent = {
+export declare type XwhaleInitEvent = {
     xwhale_manager_id: SuiObjectIdType;
 };
-export type LockUpManagerEvent = {
+export declare type LockUpManagerEvent = {
     lock_manager_id: SuiObjectIdType;
     max_lock_day: number;
     max_percent_numerator: number;
     min_lock_day: number;
     min_percent_numerator: number;
 };
-export type DividendManagerEvent = {
+export declare type DividendManagerEvent = {
     dividend_manager_id: SuiObjectIdType;
 };
-export type VeNFT = {
+export declare type VeNFT = {
     id: SuiObjectIdType;
     type: string;
     index: string;
     xwhale_balance: string;
 } & NFT;
-export type LockWhale = {
+export declare type LockWhale = {
     id: SuiObjectIdType;
     type: SuiAddressType;
     locked_start_time: number;
@@ -32,24 +32,24 @@ export type LockWhale = {
     whale_amount: string;
     xwhale_amount: string;
 };
-export type ConvertParams = {
+export declare type ConvertParams = {
     amount: string;
     venft_id?: SuiObjectIdType;
 };
-export type RedeemLockParams = {
+export declare type RedeemLockParams = {
     amount: string;
     venft_id: SuiObjectIdType;
     lock_day: number;
 };
-export type RedeemParams = {
+export declare type RedeemParams = {
     venft_id: SuiObjectIdType;
     lock_id: SuiObjectIdType;
 };
-export type CancelRedeemParams = {
+export declare type CancelRedeemParams = {
     venft_id: SuiObjectIdType;
     lock_id: SuiObjectIdType;
 };
-export type XwhaleManager = {
+export declare type XwhaleManager = {
     id: SuiObjectIdType;
     index: number;
     has_venft: {
@@ -63,19 +63,19 @@ export type XwhaleManager = {
     total_locked: string;
     treasury: string;
 };
-export type VeNFTDividendInfo = {
+export declare type VeNFTDividendInfo = {
     id: SuiObjectIdType;
     ve_nft_id: SuiObjectIdType;
     rewards: DividendReward[];
 };
-export type DividendReward = {
+export declare type DividendReward = {
     period: number;
     rewards: {
         coin_type: SuiAddressType;
         amount: string;
     }[];
 };
-export type DividendManager = {
+export declare type DividendManager = {
     id: SuiObjectIdType;
     dividends: {
         id: SuiObjectIdType;

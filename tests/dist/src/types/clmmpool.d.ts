@@ -1,6 +1,6 @@
 import BN from 'bn.js';
 import { Pool } from '../modules/resourcesModule';
-export type TickData = {
+export declare type TickData = {
     objectId: string;
     index: number;
     sqrtPrice: BN;
@@ -10,7 +10,7 @@ export type TickData = {
     feeGrowthOutsideB: BN;
     rewardersGrowthOutside: BN[];
 };
-export type Tick = {
+export declare type Tick = {
     index: Bits;
     sqrt_price: string;
     liquidity_net: Bits;
@@ -19,10 +19,10 @@ export type Tick = {
     fee_growth_outside_b: string;
     rewarders_growth_outside: string[3];
 };
-export type Bits = {
+export declare type Bits = {
     bits: string;
 };
-export type ClmmpoolData = {
+export declare type ClmmpoolData = {
     coinA: string;
     coinB: string;
     currentSqrtPrice: BN;

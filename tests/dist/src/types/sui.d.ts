@@ -1,8 +1,8 @@
 import Decimal from 'decimal.js';
 import { TransactionArgument } from '@mysten/sui.js';
-export type SuiAddressType = string;
-export type SuiObjectIdType = string;
-export type BigNumber = Decimal.Value | number | string;
+export declare type SuiAddressType = string;
+export declare type SuiObjectIdType = string;
+export declare type BigNumber = Decimal.Value | number | string;
 export declare const CLOCK_ADDRESS = "0x0000000000000000000000000000000000000000000000000000000000000006";
 export declare const ClmmIntegratePoolModule = "pool_script";
 export declare const ClmmIntegrateRouterModule = "router_script";
@@ -10,8 +10,8 @@ export declare const ClmmFetcherModule = "fetcher_script";
 export declare const CoinInfoAddress = "0x1::coin::CoinInfo";
 export declare const CoinStoreAddress = "0x1::coin::CoinStore";
 export declare const PoolLiquidityCoinType = "PoolLiquidityCoin";
-export type SuiResource = any;
-export type NFT = {
+export declare type SuiResource = any;
+export declare type NFT = {
     creator: string;
     description: string;
     image_url: string;
@@ -19,7 +19,7 @@ export type NFT = {
     name: string;
     project_url: string;
 };
-export type SuiStructTag = {
+export declare type SuiStructTag = {
     full_address: string;
     source_address: string;
     address: SuiAddressType;
@@ -27,7 +27,7 @@ export type SuiStructTag = {
     name: string;
     type_arguments: SuiAddressType[];
 };
-export type SuiBasicTypes = 'address' | 'bool' | 'u8' | 'u16' | 'u32' | 'u64' | 'u128' | 'u256';
-export type SuiTxArg = TransactionArgument | string | number | bigint | boolean;
-export type SuiInputTypes = 'object' | SuiBasicTypes;
+export declare type SuiBasicTypes = 'address' | 'bool' | 'u8' | 'u16' | 'u32' | 'u64' | 'u128' | 'u256';
+export declare type SuiTxArg = TransactionArgument | string | number | bigint | boolean;
+export declare type SuiInputTypes = 'object' | SuiBasicTypes;
 export declare const getDefaultSuiInputType: (value: any) => SuiInputTypes;

@@ -26,7 +26,7 @@ export declare enum SwapErrorCode {
 export declare enum PoolErrorCode {
     InvalidCoinTypeSequence = "InvalidCoinTypeSequence"
 }
-export type ClmmpoolsErrorCode = MathErrorCode | SwapErrorCode | CoinErrorCode | PoolErrorCode;
+export declare type ClmmpoolsErrorCode = MathErrorCode | SwapErrorCode | CoinErrorCode | PoolErrorCode;
 export declare class ClmmpoolsError extends Error {
     message: string;
     errorCode?: ClmmpoolsErrorCode;

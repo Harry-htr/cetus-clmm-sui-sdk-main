@@ -4,42 +4,42 @@ import { SuiAddressType, SuiObjectIdType } from '../types/sui';
 import { SDK } from '../sdk';
 import { IModule } from '../interfaces/IModule';
 import { CoinPairType } from './resourcesModule';
-type CommonParams = {
+declare type CommonParams = {
     pool_id: SuiObjectIdType;
     pos_id: SuiObjectIdType;
 };
-export type AddLiquidityFixTokenParams = {
+export declare type AddLiquidityFixTokenParams = {
     amount_a: number | string;
     amount_b: number | string;
     fix_amount_a: boolean;
     is_open: boolean;
 } & AddLiquidityCommonParams;
-export type AddLiquidityParams = {
+export declare type AddLiquidityParams = {
     delta_liquidity: string;
     max_amount_a: number | string;
     max_amount_b: number | string;
 } & AddLiquidityCommonParams;
-export type AddLiquidityCommonParams = {
+export declare type AddLiquidityCommonParams = {
     tick_lower: string | number;
     tick_upper: string | number;
 } & CoinPairType & CommonParams;
-export type OpenPositionParams = {
+export declare type OpenPositionParams = {
     tick_lower: string;
     tick_upper: string;
     pool_id: SuiObjectIdType;
 } & CoinPairType;
-export type RemoveLiquidityParams = {
+export declare type RemoveLiquidityParams = {
     delta_liquidity: string;
     min_amount_a: string;
     min_amount_b: string;
     collect_fee: boolean;
 } & CommonParams & CoinPairType;
-export type ClosePositionParams = {
+export declare type ClosePositionParams = {
     rewarder_coin_types: SuiAddressType[];
     min_amount_a: string;
     min_amount_b: string;
 } & CoinPairType & CommonParams;
-export type CollectFeeParams = CommonParams & CoinPairType;
+export declare type CollectFeeParams = CommonParams & CoinPairType;
 export declare class PositionModule implements IModule {
     protected _sdk: SDK;
     constructor(sdk: SDK);

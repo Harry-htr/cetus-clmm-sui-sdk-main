@@ -12,7 +12,7 @@ import { TokenModule } from './modules/tokenModule';
 import { XCetusModule } from './modules/xcetusModule';
 import { SuiObjectIdType } from './types/sui';
 import GasConfig from './utils/gas_config';
-export type SdkOptions = {
+export declare type SdkOptions = {
     fullRpcUrl: string;
     faucetURL: string;
     simulationAccount: {

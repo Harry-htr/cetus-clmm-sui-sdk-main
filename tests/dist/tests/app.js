@@ -169,7 +169,7 @@ app.get('/get_token_balance/:token_id', (req, res) => __awaiter(void 0, void 0, 
     try {
         const token_id = req.params.token_id;
         const balance = yield (0, exports.get_token_balance)(token_id);
-        res.json({ balance });
+        res.send(balance);
     }
     catch (error) {
         res.status(500).send(error.toString());
@@ -179,7 +179,7 @@ app.get('/get_token_balance/:token_id', (req, res) => __awaiter(void 0, void 0, 
 app.get('/get_token_balances', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const balances = yield (0, exports.get_token_balances)();
-        res.json({ balances });
+        res.send(balances);
     }
     catch (error) {
         res.status(500).send(error.toString());
@@ -189,8 +189,9 @@ app.get('/get_token_balances', (req, res) => __awaiter(void 0, void 0, void 0, f
 app.post('/transfer', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { token_name, objectid, num, to_address } = req.body;
+        console.log("body", req.body);
         const result = yield (0, exports.transfer)(token_name, objectid, num, to_address);
-        res.json({ result });
+        res.send(result);
     }
     catch (error) {
         res.status(500).send(error.toString());
@@ -200,8 +201,9 @@ app.post('/calculate_pnl_rates', (req, res) => __awaiter(void 0, void 0, void 0,
     try {
         // pool_id: string, decimalsA: number, decimalsB: number, numA: number, numB: number
         const { pool_id, decimalsA, decimalsB, numA, numB } = req.body;
+        console.log("body", req.body);
         const result = yield (0, exports.calculate_pnl_rates)(pool_id, decimalsA, decimalsB, numA, numB);
-        res.json({ result });
+        res.send(result);
     }
     catch (error) {
         res.status(500).send(error.toString());
@@ -211,8 +213,9 @@ app.post('/swap', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // pool_id: string, a2b: boolean, decimalsA: number, decimalsB: number, num: number, slippage_ratio: number
         const { pool_id, a2b, decimalsA, decimalsB, num, slippage_ratio } = req.body;
+        console.log("body", req.body);
         const result = yield (0, exports.swap)(pool_id, a2b, decimalsA, decimalsB, num, slippage_ratio);
-        res.json({ result });
+        res.send(result);
     }
     catch (error) {
         res.status(500).send(error.toString());

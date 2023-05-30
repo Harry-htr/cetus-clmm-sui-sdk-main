@@ -1,13 +1,13 @@
 import BN from 'bn.js';
 import { IncreaseLiquidityInput } from '../types/liquidity';
 import type { ClmmpoolData, TickData } from '../types/clmmpool';
-export type SwapStepResult = {
+export declare type SwapStepResult = {
     amountIn: BN;
     amountOut: BN;
     nextSqrtPrice: BN;
     feeAmount: BN;
 };
-export type SwapResult = {
+export declare type SwapResult = {
     amountIn: BN;
     amountOut: BN;
     feeAmount: BN;
@@ -15,7 +15,7 @@ export type SwapResult = {
     nextSqrtPrice: BN;
     crossTickNum: number;
 };
-export type CoinAmounts = {
+export declare type CoinAmounts = {
     coinA: BN;
     coinB: BN;
 };

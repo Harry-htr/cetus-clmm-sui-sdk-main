@@ -4,7 +4,7 @@ import { TickData } from '../types/clmmpool';
 /**
  * @category CollectFeesQuoteParam
  */
-export type CollectFeesQuoteParam = {
+export declare type CollectFeesQuoteParam = {
     clmmpool: Pool;
     position: Position;
     tickLower: TickData;
@@ -13,7 +13,7 @@ export type CollectFeesQuoteParam = {
 /**
  * @category CollectFeesQuote
  */
-export type CollectFeesQuote = {
+export declare type CollectFeesQuote = {
     feeOwedA: BN;
     feeOwedB: BN;
 };

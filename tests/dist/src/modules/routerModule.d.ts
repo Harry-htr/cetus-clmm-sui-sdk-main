@@ -17,25 +17,25 @@ export interface PathLink {
 export interface PathProvider {
     paths: PathLink[];
 }
-export type SplitStep = {
+export declare type SplitStep = {
     feeRate: number;
     pool: string;
     a2b: boolean;
     splitStepPercent: number;
     splitStepAmount: string;
 };
-export type OneStep = {
+export declare type OneStep = {
     stepAmount: BN;
     isExceed: boolean;
     splitSteps: SplitStep[];
 };
-export type OneStepResult = {
+export declare type OneStepResult = {
     addressArr: string[];
     amountArr: BN[];
     percentArr: number[];
     a2bArr: boolean[];
 };
-export type OnePath = {
+export declare type OnePath = {
     amountIn: BN;
     amountOut: BN;
     poolAddress: string[];
@@ -44,18 +44,18 @@ export type OnePath = {
     isExceed: boolean;
     coinType: string[];
 };
-export type OneRouter = {
+export declare type OneRouter = {
     amountIn: BN;
     amountOut: BN;
     paths: OnePath[];
     isExceed: boolean;
     byAmountIn: boolean;
 };
-export type AddressAndDirection = {
+export declare type AddressAndDirection = {
     addressMap: Map<number, string>;
     direction: boolean;
 };
-export type SwapWithRouterParams = {
+export declare type SwapWithRouterParams = {
     paths: OnePath[];
     partner: string;
     priceSplitPoint: number;
